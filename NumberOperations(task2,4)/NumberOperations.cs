@@ -8,25 +8,41 @@ namespace NumberOperationsTask24
 {
     public class NumberOperations
     {
-        static public int GetIndexFor2SpareParts(int[] a)  //task2
+        #region task2
+        /// <summary>
+        /// return index of element that devides array into 2 equal sum parts
+        /// </summary>
+        /// <param name="a">array</param>
+        /// <returns> index of element that devides array into 2 equal sum parts,-1 if not exists</returns>
+        /// <exception cref="ArgumentNullException">null reference array</exception>
+        /// <exception cref="ArgumentException">empty array</exception>
+        public static int GetIndexFor2SpareParts(int[] a)  //task2
         {
             if(a==null) throw new ArgumentNullException();
             if(a.Length == 0) throw new ArgumentException();
-            int i, leftsum = a[0], rightsum = 0;
+            int i, leftSum = a[0], rightSum = 0;
             for (int j = 1; j < a.Length; j++)
             {
-                rightsum += a[j];
+                rightSum += a[j];
             }
             for (i = 1; i < a.Length; i++)
             {
-                rightsum -= a[i];
-                if (leftsum == rightsum) break;
-                leftsum += a[i];
+                rightSum -= a[i];
+                if (leftSum == rightSum) break;
+                leftSum += a[i];
             }
             if (i != a.Length) return i;
             else return -1;
         }
-        static public int GetClosestSameDigitNumber(int number)  //task4
+        #endregion
+        #region task4
+        /// <summary>
+        /// return the closest to argument number created from the same digits
+        /// </summary>
+        /// <param name="number">nutural number</param>
+        /// <returns>closest to argument number created from the same digits,-1 if not exists</returns>
+        /// <exception cref="ArgumentOutOfRangeException">number not natural</exception>
+        public static int GetClosestSameDigitNumber(int number)  //task4
         {
             if (number < 1) throw new ArgumentOutOfRangeException();
             int[] digits = NumberToDigits(number);
@@ -53,6 +69,7 @@ namespace NumberOperationsTask24
         /// </summary>
         /// <param name="number">number for converting</param>
         /// <returns>array in reverse order(array[0]==lastdigit)</returns>
+        /// /// <exception cref="ArgumentOutOfRangeException">number not natural</exception>
         static int[] NumberToDigits(int number)
         {
             if (number < 1) throw new ArgumentOutOfRangeException();
@@ -72,5 +89,6 @@ namespace NumberOperationsTask24
             }
             return digits;
         }
+        #endregion
     }
 }
