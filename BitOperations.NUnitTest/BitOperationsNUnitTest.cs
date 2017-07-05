@@ -8,15 +8,15 @@ namespace BitOperations.NUnitTest
     public class BitOperationsNUnitTest
     {
         [TestCase(8, 15, 0, 0, ExpectedResult = 9)]
-        [TestCase(0, 15, 30, 30, ExpectedResult = 1073741824)]
+        [TestCase(0, 15, 30, 30, ExpectedResult = 0)]
         [TestCase(0, 15, 0, 30, ExpectedResult = 15)]
         [TestCase(int.MaxValue, int.MaxValue, 3, 5, ExpectedResult = int.MaxValue)]
         [TestCase(15, int.MaxValue, 3, 5, ExpectedResult = 63)]
         [TestCase(15, 15, 1, 3, ExpectedResult = 15)]
-        [TestCase(15, 15, 1, 4, ExpectedResult = 31)]
-        [TestCase(15, -15, 0, 4, ExpectedResult = 31)]
-        [TestCase(15, -15, 1, 4, ExpectedResult = 15)]
-        [TestCase(-8, -15, 1, 4, ExpectedResult = -6)]
+        [TestCase(15, 15, 1, 4, ExpectedResult = 15)]
+        [TestCase(15, -15, 0, 4, ExpectedResult = 17)]
+        [TestCase(15, -15, 1, 4, ExpectedResult = 17)]
+        [TestCase(-8, -15, 1, 4, ExpectedResult = -16)]
         public int  Insertion_GoodRanges_PositiveTest(int first, int second, int startPosition, int finishPosition)
         {
             return BitOperations1.Insertion(first, second, startPosition, finishPosition);

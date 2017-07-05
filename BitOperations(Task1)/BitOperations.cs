@@ -24,20 +24,26 @@ namespace BitOperations_Task1_
         /// <exception cref="ArgumentOutOfRangeException">Invalid ranges</exception>
         /// <exception cref="ArgumentException">start is bigger than end</exception>
         /// <returns>result number, getted by inserting second number bits into first</returns>
-        public static int Insertion(int number1, int number2, int start, int end)
+        public static int Insertion(int number1, int number2, int i, int j)
         {
-            if((start<0||start>30)||(end<0||end>30)) throw new ArgumentOutOfRangeException();
-            if(start>end) throw new ArgumentException();
-            var num1Bits = new BitArray(new int[] {number1});
-            var num2Bits = new BitArray(new int[] {number2});
-            for (int i = start; i <= end; i++)
-            {
-                num1Bits[i] = num2Bits[i - start] | num1Bits[i]; //chages only 0 to 1, but not 1 to 0
-            }
-            var bytes = new byte[num1Bits.Length/8];
-            num1Bits.CopyTo(bytes,0);
-            int res = BitConverter.ToInt32(bytes, 0);
-            return res;
+            if(i<0||i>30) throw new ArgumentOutOfRangeException($"{nameof(i)} is out of the range");
+            if (j < 0 || j > 30) throw new ArgumentOutOfRangeException($"{nameof(j)} is out of the range");
+            if (i>j) throw new ArgumentException();
+
+            const int maxval = int.MaxValue;
+            const byte maxbit = 31;
+
+            int lenght = j - i + 1;
+            int secondNumberMask = maxval >> maxbit - lenght;
+            secondNumberMask = secondNumberMask << i;
+
+            int num2Bits = number2 & secondNumberMask;
+
+            int firstNumberMask = ~secondNumberMask;
+            int num1Bits = number1 & firstNumberMask;
+
+            int result = num1Bits | num2Bits;
+            return result;
         }
     }
 }

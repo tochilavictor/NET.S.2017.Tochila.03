@@ -73,14 +73,8 @@ namespace NumberOperationsTask24
         static int[] NumberToDigits(int number)
         {
             if (number < 1) throw new ArgumentOutOfRangeException();
-            int digitsCount = 0;
+            int digitsCount = number.ToString().Length;
             int tmp = number;
-            while (tmp > 0)
-            {
-                digitsCount++;
-                tmp = tmp / 10;
-            }
-            tmp = number;
             var digits = new int[digitsCount];
             for (int i = 0; i < digits.Length; i++)
             {
